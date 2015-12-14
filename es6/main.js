@@ -7,17 +7,16 @@ import { lightsFactory } from './lights';
 
 domready(() => {
   const app = renderer();
-
   const mesh = meshFactory();
-  app.scene.add(mesh.sphere);
 
+  // Add the objects to the scene
+  Object.keys(mesh).forEach(m => app.scene.add(mesh[m]));
   Object.keys(lightsFactory).forEach(light => app.scene.add(lightsFactory[light]));
 
   document.body.appendChild(app.rend.domElement);
 
   const render = () => {
     requestAnimationFrame(render);
-    meshUpdate();
     app.rend.render(app.scene, app.cam);
   };
 
