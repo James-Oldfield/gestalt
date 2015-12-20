@@ -5,7 +5,7 @@ const sphere = {};
 const coneList = [];
 const objs = {};
 
-const noOfCones = 37;
+const noOfCones = 45;
 
 const s = {
   geom: [300, 32, 50],
