@@ -10,7 +10,6 @@ export const renderer = () => {
   const rend = new THREE.WebGLRenderer();
   rend.setSize(window.innerWidth, window.innerHeight);
   rend.setClearColor(0xff6347);
-  rend.shadowMap.enabled = true;
   cam.position.z = 1000;
 
   const app = Object.assign({}, {
