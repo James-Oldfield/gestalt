@@ -1,4 +1,3 @@
-// import domify from 'domify';
 import THREE from 'three';
 import domready from 'domready';
 
@@ -14,10 +13,10 @@ domready(() => {
   // Add the objects to the scene
   Object.keys(mesh).forEach(m => app.scene.add(mesh[m]));
   Object.keys(lights).forEach(light => app.scene.add(lights[light]));
-  const axes = new THREE.AxisHelper(100);
-	app.scene.add(axes);
 
   document.body.appendChild(app.rend.domElement);
+  document.getElementsByClassName('loading')[0].style.display = 'none';
+  document.getElementsByClassName('help')[0].style.display = 'inherit';
 
   const render = () => {
     requestAnimationFrame(render);

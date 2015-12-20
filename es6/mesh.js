@@ -5,10 +5,7 @@ const sphere = {};
 const coneList = [];
 const objs = {};
 
-// Generic math-mapping function
-const map = (val, l1, h1, l2, h2) => l2 + (h2 - l2) * (val - l1) / (h1 - l1);
-
-const noOfCones = 42;
+const noOfCones = 37;
 
 const s = {
   geom: [300, 32, 50],
@@ -23,7 +20,7 @@ export const addCone = () => {
   const cone = {};
 
   const c = {
-    geom: [1, 100, 175, 50],
+    geom: [1, 50, 150, 50],
     material: {
       color: 0x000000,
       wireframe: true,
@@ -42,7 +39,7 @@ export const addCone = () => {
 export const meshFactory = () => {
   // Create the main sphere object
   sphere.geometry = new THREE.SphereGeometry(...s.geom);
-  sphere.material = new THREE.MeshBasicMaterial({ color: 0xffffff, wireframe: true });
+  sphere.material = new THREE.MeshBasicMaterial({ color: 0xC24B36, wireframe: true });
   sphere.mesh = new THREE.Mesh(sphere.geometry, sphere.material);
   sphere.mesh.position.set(...s.pos);
 
@@ -63,7 +60,7 @@ export const meshFactory = () => {
 
     const sbt = tempCone.subtract(sphereBSP);
     const mesh = sbt.toMesh();
-    mesh.material = new THREE.MeshNormalMaterial();
+    mesh.material = new THREE.MeshLambertMaterial({ color: 0x0FFA493 });
 
     spherePivot.add(mesh);
 
@@ -76,8 +73,9 @@ export const meshFactory = () => {
         break;
       case 2:
         (swtch) ? spherePivot.rotation.z = Math.PI / 4 : spherePivot.rotation.z = Math.PI * 2 - Math.PI / 4;
-        swtch =! swtch;
+        swtch = ! swtch;
         spherePivot.rotation.x = coneSpacing * (ind + 1);
+        break;
       default:
         break;
     }
@@ -92,7 +90,6 @@ export const meshFactory = () => {
 
 export const meshUpdate = () => {
   Object.keys(objs).forEach(obj => {
-    objs[obj].rotation.x += 0.01;
+    objs[obj].rotation.x += 0.03;
   });
 };
-
