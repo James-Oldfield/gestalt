@@ -5,10 +5,11 @@ const sphere = {};
 const coneList = [];
 const objs = {};
 
-const noOfCones = 45;
+const noOfCones = 30;
 
+// Sphere options
 const s = {
-  geom: [300, 32, 50],
+  geom: [300, 32, 25],
   material: {
     color: 0xffffff,
     wireframe: true,
@@ -42,6 +43,8 @@ export const meshFactory = () => {
   sphere.material = new THREE.MeshBasicMaterial({ color: 0xC24B36, wireframe: true });
   sphere.mesh = new THREE.Mesh(sphere.geometry, sphere.material);
   sphere.mesh.position.set(...s.pos);
+  sphere.mesh.name = 'sphere';
+  sphere.material.visible = false;
 
   for (let i = 0; i < noOfCones; i ++) {
     coneList.push(addCone());
@@ -50,7 +53,7 @@ export const meshFactory = () => {
   // Over-arching sphere BSP to subtract from
   const sphereBSP = new ThreeBSP(sphere.mesh);
   const coneSpacing = Math.PI * 2 / noOfCones;
-
+false
   let swtch = true;
 
   // Create a sphere-diffed mesh for each cone
@@ -83,13 +86,13 @@ export const meshFactory = () => {
     return spherePivot;
   });
 
-  Object.assign(objs, coneListBSP);
+  Object.assign(objs, coneListBSP, { sphere: sphere.mesh });
 
   return objs;
 };
 
-export const meshUpdate = () => {
+export const meshUpdate = (rotation = 0.02) => {
   Object.keys(objs).forEach(obj => {
-    objs[obj].rotation.x += 0.03;
+    objs[obj].rotation.x += rotation;
   });
 };

@@ -3,6 +3,7 @@ import THREE from 'three';
 export const lightsFactory = () => {
   const ambientLight = new THREE.AmbientLight(0xffffff);
   const pointLights = {};
+  ambientLight.name = 'ambientLight';
 
   pointLights.pl = new THREE.PointLight(0xFFC0B1);
   pointLights.pl.position.y = 500;
